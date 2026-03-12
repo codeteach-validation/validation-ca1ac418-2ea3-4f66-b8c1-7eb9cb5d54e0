@@ -1,0 +1,94 @@
+{
+  "tests": [
+    {
+      "name": "Test 1: Syntax Check",
+      "run": "python3 -c \"import json; json.load(open('ITAI1378 - Assignment 1.ipynb'))\"",
+      "points": 9,
+      "input": "",
+      "output": "",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "exit_code"
+    },
+    {
+      "name": "Test 2: Library Import and Confirmation",
+      "run": "jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout",
+      "points": 9,
+      "input": "",
+      "output": "Libraries imported successfully.",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "included"
+    },
+    {
+      "name": "Test 3: Image Download Confirmation",
+      "run": "jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout",
+      "points": 9,
+      "input": "",
+      "output": "Image downloaded and saved as fruits.jpg.",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "included"
+    },
+    {
+      "name": "Test 4: Image Load Confirmation",
+      "run": "jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout",
+      "points": 9,
+      "input": "",
+      "output": "Image loaded successfully.",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "included"
+    },
+    {
+      "name": "Test 5: Image Type and Shape",
+      "run": "jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout",
+      "points": 9,
+      "input": "",
+      "output": "Type of the image: <class 'numpy.ndarray'>\nShape of the image:",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "included"
+    },
+    {
+      "name": "Test 6: Image Conversion to RGB",
+      "run": "python3 -c \"import json; json.load(open('ITAI1378 - Assignment 1.ipynb'))\"",
+      "points": 9,
+      "input": "",
+      "output": "",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "exit_code"
+    },
+    {
+      "name": "Test 7: Display RGB Image",
+      "run": "jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout",
+      "points": 9,
+      "input": "",
+      "output": "<Figure size",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "included"
+    },
+    {
+      "name": "Test 8: Display RGB Channels Separately",
+      "run": "jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout",
+      "points": 9,
+      "input": "",
+      "output": "<Figure size",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "included"
+    },
+    {
+      "name": "Test 9: Final Reflection Completion",
+      "run": "python3 -c \"import json,sys; nb=json.load(open(sys.argv[1], encoding='utf-8')); print('\\n'.join((''.join(cell.get('source', [])) if isinstance(cell.get('source'), list) else str(cell.get('source', ''))) for cell in nb.get('cells', [])))\" 'ITAI1378 - Assignment 1.ipynb'",
+      "points": 28,
+      "input": "",
+      "output": "Final Reflection",
+      "setup": "",
+      "timeout": 60,
+      "comparison": "included"
+    }
+  ]
+}

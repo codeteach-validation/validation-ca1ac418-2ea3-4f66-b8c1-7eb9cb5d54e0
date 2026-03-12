@@ -1,0 +1,120 @@
+name: Autograding Tests
+
+on:
+  push:
+    branches: [ main, solution ]
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Jupyter Notebook (Python)
+      run: |
+        python -m pip install --upgrade pip
+        pip install jupyter nbconvert pandas numpy matplotlib seaborn scipy statsmodels opencv-python
+
+    - name: test1syntaxcheck
+      id: test1syntaxcheck
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 1: Syntax Check"
+        command: python3 -c "import json; json.load(open('ITAI1378 - Assignment 1.ipynb'))"
+        timeout: 60
+        max-score: 9
+
+    - name: test2libraryimportandconfirmation
+      id: test2libraryimportandconfirmation
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 2: Library Import and Confirmation"
+        command: jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout
+        timeout: 60
+        max-score: 9
+
+    - name: test3imagedownloadconfirmation
+      id: test3imagedownloadconfirmation
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 3: Image Download Confirmation"
+        command: jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout
+        timeout: 60
+        max-score: 9
+
+    - name: test4imageloadconfirmation
+      id: test4imageloadconfirmation
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 4: Image Load Confirmation"
+        command: jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout
+        timeout: 60
+        max-score: 9
+
+    - name: test5imagetypeandshape
+      id: test5imagetypeandshape
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 5: Image Type and Shape"
+        command: jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout
+        timeout: 60
+        max-score: 9
+
+    - name: test6imageconversiontorgb
+      id: test6imageconversiontorgb
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 6: Image Conversion to RGB"
+        command: python3 -c "import json; json.load(open('ITAI1378 - Assignment 1.ipynb'))"
+        timeout: 60
+        max-score: 9
+
+    - name: test7displayrgbimage
+      id: test7displayrgbimage
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 7: Display RGB Image"
+        command: jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout
+        timeout: 60
+        max-score: 9
+
+    - name: test8displayrgbchannelsseparately
+      id: test8displayrgbchannelsseparately
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 8: Display RGB Channels Separately"
+        command: jupyter nbconvert --to notebook --execute ITAI1378 - Assignment 1.ipynb --stdout
+        timeout: 60
+        max-score: 9
+
+    - name: test9finalreflectioncompletion
+      id: test9finalreflectioncompletion
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: "Test 9: Final Reflection Completion"
+        command: python3 -c "import json,sys; nb=json.load(open(sys.argv[1], encoding='utf-8')); print('\n'.join((''.join(cell.get('source', [])) if isinstance(cell.get('source'), list) else str(cell.get('source', ''))) for cell in nb.get('cells', [])))" 'ITAI1378 - Assignment 1.ipynb'
+        timeout: 60
+        max-score: 28
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST1SYNTAXCHECK_RESULTS: "${{ steps.test1syntaxcheck.outputs.result }}"
+        TEST2LIBRARYIMPORTANDCONFIRMATION_RESULTS: "${{ steps.test2libraryimportandconfirmation.outputs.result }}"
+        TEST3IMAGEDOWNLOADCONFIRMATION_RESULTS: "${{ steps.test3imagedownloadconfirmation.outputs.result }}"
+        TEST4IMAGELOADCONFIRMATION_RESULTS: "${{ steps.test4imageloadconfirmation.outputs.result }}"
+        TEST5IMAGETYPEANDSHAPE_RESULTS: "${{ steps.test5imagetypeandshape.outputs.result }}"
+        TEST6IMAGECONVERSIONTORGB_RESULTS: "${{ steps.test6imageconversiontorgb.outputs.result }}"
+        TEST7DISPLAYRGBIMAGE_RESULTS: "${{ steps.test7displayrgbimage.outputs.result }}"
+        TEST8DISPLAYRGBCHANNELSSEPARATELY_RESULTS: "${{ steps.test8displayrgbchannelsseparately.outputs.result }}"
+        TEST9FINALREFLECTIONCOMPLETION_RESULTS: "${{ steps.test9finalreflectioncompletion.outputs.result }}"
+      with:
+        runners: test1syntaxcheck,test2libraryimportandconfirmation,test3imagedownloadconfirmation,test4imageloadconfirmation,test5imagetypeandshape,test6imageconversiontorgb,test7displayrgbimage,test8displayrgbchannelsseparately,test9finalreflectioncompletion
